@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sniper"
+version = "0.1.0"
+description = "Uniswap v3 pool listener and execution daemon"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "web3>=6.15.0",
+    "eth-account>=0.10.0",
+    "websockets>=12.0",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[project.scripts]
+sniper = "sniper.cli:run"
