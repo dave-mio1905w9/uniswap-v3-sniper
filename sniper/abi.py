@@ -1,5 +1,8 @@
 # minimal interfaces needed for reading on-chain state and decoding events
 
+# keccak256("PoolCreated(address,address,uint24,int24,address)")
+POOL_CREATED_TOPIC0 = "0x783cca1c0412dd0d695e784568c96da2e9c22ff989357a2e8b1d9b2b4e6b7118"
+
 ERC20_ABI = [
     {
         "constant": True,
@@ -121,4 +124,70 @@ POOL_V3_ABI = [
         "stateMutability": "view",
         "type": "function",
     },
+]
+
+SWAP_ROUTER_V3_ABI = [
+    {
+        "inputs": [
+            {
+                "components": [
+                    {"internalType": "address", "name": "tokenIn", "type": "address"},
+                    {"internalType": "address", "name": "tokenOut", "type": "address"},
+                    {"internalType": "uint24", "name": "fee", "type": "uint24"},
+                    {"internalType": "address", "name": "recipient", "type": "address"},
+                    {"internalType": "uint256", "name": "deadline", "type": "uint256"},
+                    {"internalType": "uint256", "name": "amountIn", "type": "uint256"},
+                    {"internalType": "uint256", "name": "amountOutMinimum", "type": "uint256"},
+                    {"internalType": "uint160", "name": "sqrtPriceLimitX96", "type": "uint160"},
+                ],
+                "internalType": "struct ISwapRouter.ExactInputSingleParams",
+                "name": "params",
+                "type": "tuple",
+            }
+        ],
+        "name": "exactInputSingle",
+        "outputs": [{"internalType": "uint256", "name": "amountOut", "type": "uint256"}],
+        "stateMutability": "payable",
+        "type": "function",
+    },
+    {
+        "inputs": [
+            {"internalType": "bytes[]", "name": "data", "type": "bytes[]"},
+        ],
+        "name": "multicall",
+        "outputs": [{"internalType": "bytes[]", "name": "results", "type": "bytes[]"}],
+        "stateMutability": "payable",
+        "type": "function",
+    },
+]
+
+MULTICALL3_ABI = [
+    {
+        "inputs": [
+            {
+                "components": [
+                    {"internalType": "address", "name": "target", "type": "address"},
+                    {"internalType": "bool", "name": "allowFailure", "type": "bool"},
+                    {"internalType": "bytes", "name": "callData", "type": "bytes"},
+                ],
+                "internalType": "struct Multicall3.Call3[]",
+                "name": "calls",
+                "type": "tuple[]",
+            }
+        ],
+        "name": "aggregate3",
+        "outputs": [
+            {
+                "components": [
+                    {"internalType": "bool", "name": "success", "type": "bool"},
+                    {"internalType": "bytes", "name": "returnData", "type": "bytes"},
+                ],
+                "internalType": "struct Multicall3.Result[]",
+                "name": "returnData",
+                "type": "tuple[]",
+            }
+        ],
+        "stateMutability": "payable",
+        "type": "function",
+    }
 ]
