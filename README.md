@@ -46,4 +46,4 @@ sniper --amount 0.25 --quote 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
 pytest
 ```
 
-<!-- refreshed: 2026-09-20 -->
+<!-- refreshed: 2026-09-21 -->
